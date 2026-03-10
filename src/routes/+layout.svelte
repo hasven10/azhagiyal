@@ -308,17 +308,17 @@
   {/if}
 
   <div
-    class="fixed top-0 right-0 h-full w-full sm:w-[400px]
+    class="fixed top-0 right-0 h-screen w-full sm:w-[400px]
           bg-black/95 backdrop-blur-xl
           border-l border-templegold/30
           shadow-2xl
           transform transition-transform duration-500
           {drawerOpen ? 'translate-x-0' : 'translate-x-full'}
-          z-50"
+          z-50 overflow-hidden"
   >
     <div class="p-6 sm:p-8 text-white h-full flex flex-col">
 
-      <div class="flex justify-between items-center mb-8">
+      <div class="flex justify-between items-center mb-8 shrink-0">
         <h2 class="text-2xl font-display">Your Cart</h2>
         <button on:click={() => (drawerOpen = false)} class="text-xl p-2">✕</button>
       </div>
@@ -327,7 +327,7 @@
         <p class="text-white/70">Cart is empty</p>
       {:else}
 
-        <div class="flex-1 overflow-y-auto space-y-4">
+        <div class="flex-1 overflow-y-auto space-y-4 min-h-0">
           {#each $cartItems as item}
             <div class="flex justify-between items-center border-b border-white/10 pb-4">
               <div>
@@ -346,7 +346,7 @@
           {/each}
         </div>
 
-        <div class="mt-6 border-t border-white/10 pt-6">
+        <div class="mt-6 border-t border-white/10 pt-6 shrink-0">
           <div class="flex justify-between text-lg font-semibold mb-4">
             <span>Total</span>
             <span>
