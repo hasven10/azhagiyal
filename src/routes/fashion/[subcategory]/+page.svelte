@@ -13,7 +13,7 @@
     { name: "Banarasi Saree", category: "sarees", price: 159 },
     { name: "Silk Cotton Saree", category: "sarees", price: 139 },
 
-    { name: "Anarkali Gown", category: "dresses", price: 189 },
+    { name: "Anarkali Gown", category: "dresses", price: 10 },
     { name: "Floor-Length Anarkali", category: "dresses", price: 229 },
     { name: "Indo-Western Fusion Dress", category: "dresses", price: 199 },
     { name: "Embroidered Maxi Dress", category: "dresses", price: 159 },

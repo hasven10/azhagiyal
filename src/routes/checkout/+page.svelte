@@ -6,7 +6,7 @@
   import { onMount } from 'svelte';
 
 
-  const SENANGPAY_URL = 'https://sandbox.senangpay.my/payment/';
+  const SENANGPAY_URL = 'https://app.senangpay.my/payment/';
   const MERCHANT_ID = '477177312786050';
   const SECRET_KEY = 'SK-ysSK2uSAGVCpFvPB0vxu';
 
