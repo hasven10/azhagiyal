@@ -1,10 +1,10 @@
 <script>
   import { onMount } from 'svelte';
-  import mainImage from '$lib/images/main.jpg';
-  import fashionImage from '$lib/images/fashion.jpg';
-  import brassImage from '$lib/images/brass.jpg';
-  import woodImage from '$lib/images/wood.jpg';
-  import terracottaImage from '$lib/images/terracotta.jpg';
+  import mainImage from '$lib/images/main.webp';
+  import fashionImage from '$lib/images/fashion.webp';
+  import brassImage from '$lib/images/brass.webp';
+  import woodImage from '$lib/images/wood.webp';
+  import terracottaImage from '$lib/images/terracotta.webp';
 
   let scrollY = 0;
   let visible = false;

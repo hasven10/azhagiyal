@@ -1,5 +1,5 @@
 <script>
-  import styleBg from '$lib/images/style.jpg';
+  import styleBg from '$lib/images/style.webp';
 
   const sections = [
     {
