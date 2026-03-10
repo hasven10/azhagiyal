@@ -47,7 +47,7 @@
   }
 </script>
 
-<div class="min-h-screen font-body">
+<div class="min-h-screen font-body flex flex-col">
 
   <!-- NAVBAR -->
   <nav class="fixed top-0 left-0 w-full z-50
@@ -373,9 +373,84 @@
   </div>
 
 
-  <main>
+  <!-- MAIN CONTENT -->
+  <main class="flex-1">
     <slot />
   </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-black text-white border-t border-templegold/15">
+    <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-16">
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8">
+
+        <!-- Brand -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <a href="/" class="text-2xl font-display text-templegold tracking-wide">
+            அழகியல்
+          </a>
+          <p class="mt-3 text-white/50 font-display text-sm leading-relaxed">
+            From the ancient land of culture and colours to your loving homes.
+          </p>
+        </div>
+
+        <!-- Shop -->
+        <div>
+          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+            Shop
+          </h4>
+          <div class="flex flex-col gap-2.5">
+            <a href="/fashion" class="text-white/60 hover:text-templegold transition text-sm font-display">Fashion</a>
+            <a href="/brass" class="text-white/60 hover:text-templegold transition text-sm font-display">Brass</a>
+            <a href="/terracotta" class="text-white/60 hover:text-templegold transition text-sm font-display">Terracotta</a>
+            <a href="/wood" class="text-white/60 hover:text-templegold transition text-sm font-display">Wood</a>
+          </div>
+        </div>
+
+        <!-- Policies -->
+        <div>
+          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+            Policies
+          </h4>
+          <div class="flex flex-col gap-2.5">
+            <a href="/terms" class="text-white/60 hover:text-templegold transition text-sm font-display">Terms &amp; Conditions</a>
+            <a href="/privacy" class="text-white/60 hover:text-templegold transition text-sm font-display">Privacy Policy</a>
+            <a href="/refund" class="text-white/60 hover:text-templegold transition text-sm font-display">Cancellation &amp; Refund</a>
+            <a href="/shipping" class="text-white/60 hover:text-templegold transition text-sm font-display">Shipping Policy</a>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+            Contact
+          </h4>
+          <div class="flex flex-col gap-2.5">
+            <a href="mailto:customer-care@azhagiyal.store" 
+               class="text-white/60 hover:text-templegold transition text-sm font-display break-all">
+              customer-care@azhagiyal.store
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="mt-12 pt-6 border-t border-white/10 
+                  flex flex-col sm:flex-row justify-between items-center gap-3">
+        <p class="text-white/30 text-xs font-display">
+          &copy; 2026 Azhagiyal Store. All rights reserved.
+        </p>
+        <div class="flex gap-6">
+          <a href="/terms" class="text-white/30 hover:text-templegold transition text-xs font-display">Terms</a>
+          <a href="/privacy" class="text-white/30 hover:text-templegold transition text-xs font-display">Privacy</a>
+          <a href="/shipping" class="text-white/30 hover:text-templegold transition text-xs font-display">Shipping</a>
+          <a href="/refund" class="text-white/30 hover:text-templegold transition text-xs font-display">Refund</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
 
   {#if $cartToast}
   <div
