@@ -54,8 +54,11 @@
 </script>
 
 <svelte:head>
-  <title>Azhagiyal – Indian Heritage</title>
-  <link rel="icon" href="/azhagiyal.svg" type="image/svg+xml" />
+  <title>அழகியல் – Indian Heritage</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-64.png" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
+
 </svelte:head>
 
 <div class="min-h-screen font-body flex flex-col">
@@ -70,7 +73,7 @@
 
 
       <a href="/" class="flex items-center">
-        <img src={logo} alt="Azhagiyal" class="h-10 lg:h-12">
+        <img src={logo} alt="Azhagiyal" class="h-16 lg:h-20">
       </a>
 
       <!-- CENTER MENU (desktop only) -->

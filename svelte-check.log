@@ -1,0 +1,68 @@
+Loading svelte-check in workspace: /var/www/azhagiyal
+Getting Svelte diagnostics...
+
+/var/www/azhagiyal/src/hooks.server.ts:9:5
+Error: Type '{ id: number; email: string; full_name: string; phone: string | null; role: users_role | null; } | null' is not assignable to type '{ id: number; email: string; full_name: string; phone: string | null; role: string; } | null'.
+  Type '{ id: number; email: string; full_name: string; phone: string | null; role: $Enums.users_role | null; }' is not assignable to type '{ id: number; email: string; full_name: string; phone: string | null; role: string; }'.
+    Types of property 'role' are incompatible.
+      Type 'string | null' is not assignable to type 'string'.
+        Type 'null' is not assignable to type 'string'. 
+    const user = await getSession(sessionId);
+    event.locals.user = user;
+  } else {
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:30:34
+Error: Property 'remove' does not exist on type '(item: Omit<CartItem, "quantity">) => void'. (ts)
+            class="text-kumkum hover:text-black transition"
+            on:click={() => cart.remove(item.name)}
+          >
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:42:32
+Error: Parameter 'sum' implicitly has an 'any' type. (ts)
+    <div class="mt-12 text-2xl font-semibold">
+      Total: RM {$cart.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+    </div>
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:42:37
+Error: Parameter 'i' implicitly has an 'any' type. (ts)
+    <div class="mt-12 text-2xl font-semibold">
+      Total: RM {$cart.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+    </div>
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:11:8
+Error: Cannot use 'cart' as a store. 'cart' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'. (ts)
+
+  {#if $cart.length === 0}
+    <p class="text-lg text-peacock">Your cart is empty.</p>
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:17:14
+Error: Cannot use 'cart' as a store. 'cart' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'. (ts)
+
+      {#each $cart as item}
+
+/var/www/azhagiyal/src/routes/cart/+page.svelte:42:18
+Error: Cannot use 'cart' as a store. 'cart' needs to be an object with a subscribe method on it.
+
+No overload matches this call.
+  Overload 1 of 2, '(store: SvelteStore<any>): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'.
+  Overload 2 of 2, '(store: SvelteStore<any> | null | undefined): any', gave the following error.
+    Argument of type '(item: Omit<CartItem, "quantity">) => void' is not assignable to parameter of type 'SvelteStore<any>'. (ts)
+    <div class="mt-12 text-2xl font-semibold">
+      Total: RM {$cart.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+    </div>
+
+====================================
+svelte-check found 7 errors and 0 warnings in 2 files
