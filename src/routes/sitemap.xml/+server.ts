@@ -1,24 +1,28 @@
-import { SitemapStream, streamToPromise } from 'sitemap';
-
 export async function GET() {
 
-    const sm = new SitemapStream({
-        hostname: 'https://azhagiyal.store'
-    });
+    const xml = `
+  <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+      <loc>https://azhagiyal.store/</loc>
+    </url>
+    <url>
+      <loc>https://azhagiyal.store/fashion</loc>
+    </url>
+    <url>
+      <loc>https://azhagiyal.store/brass</loc>
+    </url>
+    <url>
+      <loc>https://azhagiyal.store/terracotta</loc>
+    </url>
+    <url>
+      <loc>https://azhagiyal.store/wood</loc>
+    </url>
+  </urlset>
+  `;
 
-    sm.write({ url: '/', priority: 1 });
-    sm.write({ url: '/fashion', priority: 0.9 });
-    sm.write({ url: '/brass', priority: 0.9 });
-    sm.write({ url: '/terracotta', priority: 0.9 });
-    sm.write({ url: '/wood', priority: 0.9 });
-
-    sm.end();
-
-    const xml = await streamToPromise(sm);
-
-    return new Response(xml.toString(), {
+    return new Response(xml, {
         headers: {
-            'Content-Type': 'application/xml'
+            "Content-Type": "application/xml"
         }
     });
 }
