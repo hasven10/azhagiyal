@@ -7,7 +7,7 @@ declare global {
         email: string;
         full_name: string;
         phone: string | null;
-        role: string;
+        role: string | null;
       } | null;
     }
   }

@@ -1,14 +1,14 @@
 <!--src/routes/+layout.svelte-->
 
 <script lang="ts">
-  import '../app.css';
-  import logo from '$lib/images/logo.png';
+  import "../app.css";
+  import logo from "$lib/images/logo.png";
   import {
     cartItems,
     cartAnim,
     cartToast,
-    removeFromCart
-  } from '$lib/stores/cart';
+    removeFromCart,
+  } from "$lib/stores/cart";
 
   export let data;
   $: user = data?.user;
@@ -27,13 +27,13 @@
       { name: "Kurtas", slug: "kurtas" },
       { name: "Sarees", slug: "sarees" },
       { name: "Bottomwear", slug: "bottomwear" },
-      { name: "Co-ord Sets", slug: "coord-sets" }
+      { name: "Co-ord Sets", slug: "coord-sets" },
     ],
     accessories: [
       { name: "Jewelleries", slug: "jewelleries" },
       { name: "Bags", slug: "bags" },
-      { name: "Earrings", slug: "earrings" }
-    ]
+      { name: "Earrings", slug: "earrings" },
+    ],
   };
 
   function openMenu() {
@@ -59,26 +59,42 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png" />
 
+  <meta
+    name="description"
+    content="Discover authentic Indian heritage products including sarees, brass idols, terracotta art, and handcrafted decor."
+  />
+
+  <meta
+    name="keywords"
+    content="Indian heritage, saree store, brass idols, terracotta art, Indian fashion Malaysia"
+  />
+
+  <meta name="author" content="Azhagiyal Store" />
+  <meta property="og:title" content="Azhagiyal – Indian Heritage" />
+  <meta
+    property="og:description"
+    content="Authentic Indian heritage products delivered to your home."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://azhagiyal.store" />
+  <meta property="og:image" content="https://azhagiyal.store/og-image.png" />
 </svelte:head>
 
 <div class="min-h-screen font-body flex flex-col">
-
   <!-- NAVBAR -->
-  <nav class="fixed top-0 left-0 w-full z-50
+  <nav
+    class="fixed top-0 left-0 w-full z-50
               px-4 sm:px-8 lg:px-12 py-4 lg:py-6
               bg-black/50 backdrop-blur-lg
-              text-white">
-
+              text-white"
+  >
     <div class="flex items-center justify-between">
-
-
       <a href="/" class="flex items-center">
-        <img src={logo} alt="Azhagiyal" class="h-16 lg:h-20">
+        <img src={logo} alt="Azhagiyal" class="h-16 lg:h-20" />
       </a>
 
       <!-- CENTER MENU (desktop only) -->
       <div class="hidden lg:flex gap-12 text-lg font-display relative">
-
         <!-- FASHION -->
         <div class="relative">
           <button
@@ -145,29 +161,33 @@
         </div>
 
         <a href="/brass" class="hover:text-templegold transition">Brass</a>
-        <a href="/terracotta" class="hover:text-templegold transition">Terracotta</a>
+        <a href="/terracotta" class="hover:text-templegold transition"
+          >Terracotta</a
+        >
         <a href="/wood" class="hover:text-templegold transition">Wood</a>
       </div>
 
       <!-- RIGHT SIDE -->
       <div class="flex gap-4 sm:gap-6 text-base font-display items-center">
-
         <!-- LOGIN / ACCOUNT (desktop) -->
         {#if user}
-          <a href="/account" class="hidden sm:block hover:text-templegold transition">
+          <a
+            href="/account"
+            class="hidden sm:block hover:text-templegold transition"
+          >
             {user.full_name}
           </a>
         {:else}
-          <a href="/auth/login" class="hidden sm:block hover:text-templegold transition">
+          <a
+            href="/auth/login"
+            class="hidden sm:block hover:text-templegold transition"
+          >
             Login
           </a>
         {/if}
 
         <!-- CART ICON -->
-        <button
-          class="relative group"
-          on:click={() => (drawerOpen = true)}
-        >
+        <button class="relative group" on:click={() => (drawerOpen = true)}>
           <svg
             class="w-6 h-6 lg:w-7 lg:h-7 transition-transform duration-300
                   {$cartAnim ? 'animate-bounce scale-110' : ''}
@@ -177,8 +197,11 @@
             stroke-width="1.8"
             viewBox="0 0 24 24"
           >
-            <path stroke-linecap="round" stroke-linejoin="round"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h13M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.5 6h13M7 13L5.4 5M10 21a1 1 0 100-2 1 1 0 000 2zm8 0a1 1 0 100-2 1 1 0 000 2z"
+            />
           </svg>
 
           {#if $cartItems.length > 0}
@@ -188,12 +211,11 @@
                     w-5 h-5 flex items-center justify-center
                     rounded-full font-semibold
                     transition-all duration-300
-                    {$cartAnim ? 'scale-125 shadow-lg shadow-templegold/60' : ''}"
+                    {$cartAnim
+                ? 'scale-125 shadow-lg shadow-templegold/60'
+                : ''}"
             >
-              {$cartItems.reduce(
-                (sum: number, i) => sum + i.quantity,
-                0
-              )}
+              {$cartItems.reduce((sum: number, i) => sum + i.quantity, 0)}
             </span>
           {/if}
         </button>
@@ -204,15 +226,20 @@
           on:click={() => (mobileMenuOpen = !mobileMenuOpen)}
           aria-label="Toggle menu"
         >
-          <span class="block w-6 h-0.5 bg-white transition-all duration-300
-                       {mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}"></span>
-          <span class="block w-6 h-0.5 bg-white transition-all duration-300
-                       {mobileMenuOpen ? 'opacity-0' : ''}"></span>
-          <span class="block w-6 h-0.5 bg-white transition-all duration-300
-                       {mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}"></span>
+          <span
+            class="block w-6 h-0.5 bg-white transition-all duration-300
+                       {mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-white transition-all duration-300
+                       {mobileMenuOpen ? 'opacity-0' : ''}"
+          ></span>
+          <span
+            class="block w-6 h-0.5 bg-white transition-all duration-300
+                       {mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}"
+          ></span>
         </button>
       </div>
-
     </div>
   </nav>
 
@@ -237,14 +264,21 @@
            overflow-y-auto"
   >
     <div class="p-6 pt-20 text-white font-display">
-
       <!-- LOGIN / ACCOUNT (mobile) -->
       {#if user}
-        <a href="/account" class="text-lg mb-6 text-templegold block" on:click={closeMobileMenu}>
+        <a
+          href="/account"
+          class="text-lg mb-6 text-templegold block"
+          on:click={closeMobileMenu}
+        >
           {user.full_name}
         </a>
       {:else}
-        <a href="/auth/login" class="text-lg mb-6 hover:text-templegold transition block" on:click={closeMobileMenu}>
+        <a
+          href="/auth/login"
+          class="text-lg mb-6 hover:text-templegold transition block"
+          on:click={closeMobileMenu}
+        >
           Login / Register
         </a>
       {/if}
@@ -260,16 +294,25 @@
           <svg
             class="w-4 h-4 transition-transform duration-300
                    {mobileFashionOpen ? 'rotate-180' : ''}"
-            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
           >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
           </svg>
         </button>
 
         {#if mobileFashionOpen}
           <div class="mt-4 ml-4 space-y-6">
             <div>
-              <h4 class="text-templegold text-sm font-semibold mb-3 uppercase tracking-wider">
+              <h4
+                class="text-templegold text-sm font-semibold mb-3 uppercase tracking-wider"
+              >
                 Apparels
               </h4>
               <div class="flex flex-col gap-2.5">
@@ -285,7 +328,9 @@
               </div>
             </div>
             <div>
-              <h4 class="text-templegold text-sm font-semibold mb-3 uppercase tracking-wider">
+              <h4
+                class="text-templegold text-sm font-semibold mb-3 uppercase tracking-wider"
+              >
                 Accessories
               </h4>
               <div class="flex flex-col gap-2.5">
@@ -305,22 +350,29 @@
       </div>
 
       <!-- Other links -->
-      <a href="/brass" class="block text-lg py-3 hover:text-templegold transition"
-         on:click={closeMobileMenu}>
+      <a
+        href="/brass"
+        class="block text-lg py-3 hover:text-templegold transition"
+        on:click={closeMobileMenu}
+      >
         Brass
       </a>
-      <a href="/terracotta" class="block text-lg py-3 hover:text-templegold transition"
-         on:click={closeMobileMenu}>
+      <a
+        href="/terracotta"
+        class="block text-lg py-3 hover:text-templegold transition"
+        on:click={closeMobileMenu}
+      >
         Terracotta
       </a>
-      <a href="/wood" class="block text-lg py-3 hover:text-templegold transition"
-         on:click={closeMobileMenu}>
+      <a
+        href="/wood"
+        class="block text-lg py-3 hover:text-templegold transition"
+        on:click={closeMobileMenu}
+      >
         Wood
       </a>
-
     </div>
   </div>
-
 
   <!-- CART DRAWER -->
   {#if drawerOpen}
@@ -341,19 +393,21 @@
           z-50 overflow-hidden"
   >
     <div class="p-6 sm:p-8 text-white h-full flex flex-col">
-
       <div class="flex justify-between items-center mb-8 shrink-0">
         <h2 class="text-2xl font-display">Your Cart</h2>
-        <button on:click={() => (drawerOpen = false)} class="text-xl p-2">✕</button>
+        <button on:click={() => (drawerOpen = false)} class="text-xl p-2"
+          >✕</button
+        >
       </div>
 
       {#if $cartItems.length === 0}
         <p class="text-white/70">Cart is empty</p>
       {:else}
-
         <div class="flex-1 overflow-y-auto space-y-4 min-h-0">
           {#each $cartItems as item}
-            <div class="flex justify-between items-center border-b border-white/10 pb-4">
+            <div
+              class="flex justify-between items-center border-b border-white/10 pb-4"
+            >
               <div>
                 <p>{item.name}</p>
                 <p class="text-templegold">
@@ -376,7 +430,7 @@
             <span>
               RM {$cartItems.reduce(
                 (sum: number, i) => sum + i.price * i.quantity,
-                0
+                0,
               )}
             </span>
           </div>
@@ -390,12 +444,9 @@
             Proceed to Checkout
           </a>
         </div>
-
       {/if}
-
     </div>
   </div>
-
 
   <!-- MAIN CONTENT -->
   <main class="flex-1">
@@ -405,12 +456,15 @@
   <!-- FOOTER -->
   <footer class="bg-black text-white border-t border-templegold/15">
     <div class="max-w-[1600px] mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-16">
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8">
-
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-8"
+      >
         <!-- Brand -->
         <div class="sm:col-span-2 lg:col-span-1">
-          <a href="/" class="text-2xl font-display text-templegold tracking-wide">
+          <a
+            href="/"
+            class="text-2xl font-display text-templegold tracking-wide"
+          >
             அழகியல்
           </a>
           <p class="mt-3 text-white/50 font-display text-sm leading-relaxed">
@@ -420,74 +474,129 @@
 
         <!-- Shop -->
         <div>
-          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+          <h4
+            class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4"
+          >
             Shop
           </h4>
           <div class="flex flex-col gap-2.5">
-            <a href="/fashion" class="text-white/60 hover:text-templegold transition text-sm font-display">Fashion</a>
-            <a href="/brass" class="text-white/60 hover:text-templegold transition text-sm font-display">Brass</a>
-            <a href="/terracotta" class="text-white/60 hover:text-templegold transition text-sm font-display">Terracotta</a>
-            <a href="/wood" class="text-white/60 hover:text-templegold transition text-sm font-display">Wood</a>
+            <a
+              href="/fashion"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Fashion</a
+            >
+            <a
+              href="/brass"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Brass</a
+            >
+            <a
+              href="/terracotta"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Terracotta</a
+            >
+            <a
+              href="/wood"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Wood</a
+            >
           </div>
         </div>
 
         <!-- Policies -->
         <div>
-          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+          <h4
+            class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4"
+          >
             Policies
           </h4>
           <div class="flex flex-col gap-2.5">
-            <a href="/terms" class="text-white/60 hover:text-templegold transition text-sm font-display">Terms &amp; Conditions</a>
-            <a href="/privacy" class="text-white/60 hover:text-templegold transition text-sm font-display">Privacy Policy</a>
-            <a href="/refund" class="text-white/60 hover:text-templegold transition text-sm font-display">Cancellation &amp; Refund</a>
-            <a href="/shipping" class="text-white/60 hover:text-templegold transition text-sm font-display">Shipping Policy</a>
+            <a
+              href="/terms"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Terms &amp; Conditions</a
+            >
+            <a
+              href="/privacy"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Privacy Policy</a
+            >
+            <a
+              href="/refund"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Cancellation &amp; Refund</a
+            >
+            <a
+              href="/shipping"
+              class="text-white/60 hover:text-templegold transition text-sm font-display"
+              >Shipping Policy</a
+            >
           </div>
         </div>
 
         <!-- Contact -->
         <div>
-          <h4 class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4">
+          <h4
+            class="text-templegold font-display font-semibold text-sm uppercase tracking-wider mb-4"
+          >
             Contact
           </h4>
           <div class="flex flex-col gap-2.5">
-            <a href="mailto:customer-care@azhagiyal.store" 
-               class="text-white/60 hover:text-templegold transition text-sm font-display break-all">
+            <a
+              href="mailto:customer-care@azhagiyal.store"
+              class="text-white/60 hover:text-templegold transition text-sm font-display break-all"
+            >
               customer-care@azhagiyal.store
             </a>
           </div>
         </div>
-
       </div>
 
       <!-- Bottom bar -->
-      <div class="mt-12 pt-6 border-t border-white/10 
-                  flex flex-col sm:flex-row justify-between items-center gap-3">
+      <div
+        class="mt-12 pt-6 border-t border-white/10
+                  flex flex-col sm:flex-row justify-between items-center gap-3"
+      >
         <p class="text-white/30 text-xs font-display">
           &copy; 2026 Azhagiyal Store. All rights reserved.
         </p>
         <div class="flex gap-6">
-          <a href="/terms" class="text-white/30 hover:text-templegold transition text-xs font-display">Terms</a>
-          <a href="/privacy" class="text-white/30 hover:text-templegold transition text-xs font-display">Privacy</a>
-          <a href="/shipping" class="text-white/30 hover:text-templegold transition text-xs font-display">Shipping</a>
-          <a href="/refund" class="text-white/30 hover:text-templegold transition text-xs font-display">Refund</a>
+          <a
+            href="/terms"
+            class="text-white/30 hover:text-templegold transition text-xs font-display"
+            >Terms</a
+          >
+          <a
+            href="/privacy"
+            class="text-white/30 hover:text-templegold transition text-xs font-display"
+            >Privacy</a
+          >
+          <a
+            href="/shipping"
+            class="text-white/30 hover:text-templegold transition text-xs font-display"
+            >Shipping</a
+          >
+          <a
+            href="/refund"
+            class="text-white/30 hover:text-templegold transition text-xs font-display"
+            >Refund</a
+          >
         </div>
       </div>
-
     </div>
   </footer>
 
   {#if $cartToast}
-  <div
-    class="fixed top-20 right-4 sm:right-10
+    <div
+      class="fixed top-20 right-4 sm:right-10
            bg-templegold text-black
            px-4 sm:px-6 py-3 rounded-xl
            shadow-lg
            animate-fadeIn
            z-50
            text-sm sm:text-base"
-  >
-    Item added to cart ✓
-  </div>
+    >
+      Item added to cart ✓
+    </div>
   {/if}
-
 </div>

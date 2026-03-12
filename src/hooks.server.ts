@@ -6,7 +6,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
   if (sessionId) {
     const user = await getSession(sessionId);
-    event.locals.user = user;
+    event.locals.user = user as App.Locals['user'];
   } else {
     event.locals.user = null;
   }

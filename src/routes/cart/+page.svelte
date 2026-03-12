@@ -1,23 +1,18 @@
 <script lang="ts">
-  import { cart } from '$lib/stores/cart';
+  import { cartItems, removeFromCart } from "$lib/stores/cart";
 </script>
 
 <section class="min-h-screen bg-ivory px-12 py-32">
+  <h1 class="text-4xl font-tamil text-kumkum mb-12">Your Cart</h1>
 
-  <h1 class="text-4xl font-tamil text-kumkum mb-12">
-    Your Cart
-  </h1>
-
-  {#if $cart.length === 0}
+  {#if $cartItems.length === 0}
     <p class="text-lg text-peacock">Your cart is empty.</p>
   {:else}
-
     <div class="space-y-6">
-
-      {#each $cart as item}
-
-        <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow">
-
+      {#each $cartItems as item}
+        <div
+          class="flex justify-between items-center bg-white p-6 rounded-2xl shadow"
+        >
           <div>
             <h3 class="text-xl font-display">{item.name}</h3>
             <p class="text-templegold">
@@ -27,19 +22,19 @@
 
           <button
             class="text-kumkum hover:text-black transition"
-            on:click={() => cart.remove(item.name)}
+            on:click={() => removeFromCart(item.name)}
           >
             Remove
           </button>
-
         </div>
-
       {/each}
-
     </div>
 
     <div class="mt-12 text-2xl font-semibold">
-      Total: RM {$cart.reduce((sum, i) => sum + i.price * i.quantity, 0)}
+      Total: RM {$cartItems.reduce(
+        (sum: number, i) => sum + i.price * i.quantity,
+        0,
+      )}
     </div>
 
     <a
@@ -48,7 +43,5 @@
     >
       Proceed to Checkout
     </a>
-
   {/if}
-
 </section>
