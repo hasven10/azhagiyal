@@ -1,11 +1,17 @@
+<!--src/routes/+layout.svelte-->
+
 <script lang="ts">
   import '../app.css';
+  import logo from '$lib/images/logo.png';
   import {
     cartItems,
     cartAnim,
     cartToast,
     removeFromCart
   } from '$lib/stores/cart';
+
+  export let data;
+  $: user = data?.user;
 
   let drawerOpen = false;
   let mobileMenuOpen = false;
@@ -47,6 +53,11 @@
   }
 </script>
 
+<svelte:head>
+  <title>Azhagiyal – Indian Heritage</title>
+  <link rel="icon" href="/azhagiyal.svg" type="image/svg+xml" />
+</svelte:head>
+
 <div class="min-h-screen font-body flex flex-col">
 
   <!-- NAVBAR -->
@@ -57,11 +68,9 @@
 
     <div class="flex items-center justify-between">
 
-      <!-- LOGO -->
-      <a href="/" 
-         class="text-2xl lg:text-3xl font-display tracking-wide 
-                hover:text-templegold transition">
-        அழகியல்
+
+      <a href="/" class="flex items-center">
+        <img src={logo} alt="Azhagiyal" class="h-10 lg:h-12">
       </a>
 
       <!-- CENTER MENU (desktop only) -->
@@ -140,10 +149,16 @@
       <!-- RIGHT SIDE -->
       <div class="flex gap-4 sm:gap-6 text-base font-display items-center">
 
-        <!-- Search (desktop) -->
-        <button class="hidden sm:block hover:text-templegold transition">
-          Search
-        </button>
+        <!-- LOGIN / ACCOUNT (desktop) -->
+        {#if user}
+          <a href="/account" class="hidden sm:block hover:text-templegold transition">
+            {user.full_name}
+          </a>
+        {:else}
+          <a href="/auth/login" class="hidden sm:block hover:text-templegold transition">
+            Login
+          </a>
+        {/if}
 
         <!-- CART ICON -->
         <button
@@ -220,10 +235,16 @@
   >
     <div class="p-6 pt-20 text-white font-display">
 
-      <!-- Search (mobile) -->
-      <button class="text-lg mb-8 hover:text-templegold transition block">
-        Search
-      </button>
+      <!-- LOGIN / ACCOUNT (mobile) -->
+      {#if user}
+        <a href="/account" class="text-lg mb-6 text-templegold block" on:click={closeMobileMenu}>
+          {user.full_name}
+        </a>
+      {:else}
+        <a href="/auth/login" class="text-lg mb-6 hover:text-templegold transition block" on:click={closeMobileMenu}>
+          Login / Register
+        </a>
+      {/if}
 
       <!-- Fashion with accordion -->
       <div class="mb-4">
