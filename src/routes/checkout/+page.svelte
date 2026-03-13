@@ -2,13 +2,8 @@
 
 <script lang="ts">
   import mainImage from '$lib/images/main.webp';
-  import { cartItems, clearCart } from '$lib/stores/cart';
+  import { cartItems } from '$lib/stores/cart';
   import { onMount } from 'svelte';
-
-
-  const SENANGPAY_URL = 'https://app.senangpay.my/payment/';
-  const MERCHANT_ID = '477177312786050';
-  const SECRET_KEY = 'SK-ysSK2uSAGVCpFvPB0vxu';
 
   let name = '';
   let email = '';
@@ -25,25 +20,6 @@
     return unsub;
   });
 
-  async function generateHash(secretKey: string, detail: string, amount: string, orderId: string) {
-    const str = secretKey + detail + amount + orderId;
-    const encoder = new TextEncoder();
-    const keyData = encoder.encode(secretKey);
-    const msgData = encoder.encode(str);
-
-    const cryptoKey = await crypto.subtle.importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign']
-    );
-
-    const signature = await crypto.subtle.sign('HMAC', cryptoKey, msgData);
-    const hashArray = Array.from(new Uint8Array(signature));
-    return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
-  }
-
   async function handleCheckout() {
     if (!name || !email || !phone) {
       alert('Please fill in all fields.');
@@ -58,31 +34,33 @@
     isSubmitting = true;
 
     try {
-      // Build order details
-      const detail = items
-        .map((i) => `${i.name}_x${i.quantity}`)
-        .join(',_');
+      const response = await fetch('/api/checkout/initiate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          phone,
+          items
+        })
+      });
 
-      const amount = total.toFixed(2);
-      const orderId = 'AZH-' + Date.now();
+      if (!response.ok) {
+        const error = await response.json().catch(() => ({}));
+        throw new Error(error.error || 'Failed to initiate payment');
+      }
 
-      // Generate secure hash
-      const hash = await generateHash(SECRET_KEY, detail, amount, orderId);
+      const { url, fields } = (await response.json()) as {
+        url: string;
+        fields: Record<string, string>;
+      };
 
       // Create and submit the form to senangPay
       const form = document.createElement('form');
       form.method = 'POST';
-      form.action = SENANGPAY_URL + MERCHANT_ID;
-
-      const fields = {
-        detail: detail,
-        amount: amount,
-        order_id: orderId,
-        hash: hash,
-        name: name,
-        email: email,
-        phone: phone
-      };
+      form.action = url;
 
       for (const [key, value] of Object.entries(fields)) {
         const input = document.createElement('input');

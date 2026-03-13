@@ -9,7 +9,16 @@ export interface CartItem {
 function loadInitial(): CartItem[] {
   if (typeof localStorage === 'undefined') return [];
   const saved = localStorage.getItem('azhagiyal-cart');
-  return saved ? JSON.parse(saved) : [];
+  if (!saved) return [];
+
+  try {
+    const parsed = JSON.parse(saved);
+    if (!Array.isArray(parsed)) return [];
+    return parsed;
+  } catch (err) {
+    console.error('Failed to parse saved cart from localStorage', err);
+    return [];
+  }
 }
 
 export const cartItems = writable<CartItem[]>(loadInitial());

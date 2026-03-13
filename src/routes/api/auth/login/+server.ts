@@ -27,10 +27,11 @@ export const POST: RequestHandler = async ({ request, cookies }) => {
     const sessionId = await createSession(user.id);
 
     // Set cookie
+    const secure = process.env.NODE_ENV === 'production';
     cookies.set('session_id', sessionId, {
       path: '/',
       httpOnly: true,
-      secure: true,
+      secure,
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 30
     });
